@@ -19,7 +19,7 @@ const Account = ({
     sendErrorMessage: Function,
   }) => (
     <div className="mw10 center ph3-ns">
-      <h1 className="f2 lh-title mh3">Hi from account</h1>
+      <h1 className="f2 lh-title mh3">Account</h1>
       <div className="cf ph2-ns">
         <div className="fl w-100 w-50-ns pa2">
           <div className=" bg-white pa2" >
