@@ -21,7 +21,7 @@ const InnerForm = ({
   (
     <main className="black-80">
       <form onSubmit={handleSubmit} className="measure">
-        <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
+        <fieldset id="update_profile_form" className="ba b--transparent ph0 mh0">
           <legend className="f4 fw6 ph0 mh0">Update Profile</legend>
           <FormWideError error={errors.formwide} />
           <div className="mt3">
