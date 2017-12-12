@@ -7,12 +7,19 @@ import SignIn from '../containers/SignIn';
 import ForgotPassword from '../containers/ForgotPassword';
 import SignUp from '../containers/SignUp';
 import Account from '../containers/Account';
+import Messages from '../containers/Messages';
 import HOCAuthRequired from '../containers/HOCAuthRequired';
 import Toast from '../containers/Toast';
 
 const protectedAccount = () => (
   <HOCAuthRequired>
     <Account />
+  </HOCAuthRequired>
+);
+
+const protectedMessages = () => (
+  <HOCAuthRequired>
+    <Messages />
   </HOCAuthRequired>
 );
 
@@ -25,6 +32,7 @@ const App = () => (
       <Route path="/forgotPassword" component={ForgotPassword} />
       <Route path="/signup" component={SignUp} />
       <Route path="/account" component={protectedAccount} />
+      <Route path="/messages" component={protectedMessages} />
     </Switch>
     <Toast />
   </div>

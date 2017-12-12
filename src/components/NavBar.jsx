@@ -32,11 +32,14 @@ const NavigationAuth = ({ signOut }: { signOut: Function }) =>
         </div>
       </Link>
       <div className="flex-grow pa3 flex items-center">
-        <Link to="/home">
+        <Link to="/">
           <div className="f6 link dib white dim mr3 mr4-ns">Home</div>
         </Link>
         <Link to="/account">
           <div className="f6 link dib white dim mr3 mr4-ns">Account</div>
+        </Link>
+        <Link to="/messages">
+          <div className="f6 link dib white dim mr3 mr4-ns">Messages</div>
         </Link>
         <div
           tabIndex={0}
