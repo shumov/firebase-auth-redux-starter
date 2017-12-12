@@ -1,27 +1,22 @@
 /* @flow */
-import Firebase from 'firebase';
+import firebase from 'firebase';
 import type {
   authUserActionType,
   authErrorActionType,
   Dispatch,
 } from '../types/auth';
+import {
+  firebaseConfig
+} from "./configs.private";
 
+require('firebase/auth');
 require('firebase/firestore');
 
-// pull out firebase into its own file soon.
-const config = {
-  apiKey: 'AIzaSyC3en9Q3XwoyhlyCY8wQbXK8MSVVBg_H6s',
-  authDomain: 'nextjs-firebase-auth-test.firebaseapp.com',
-  databaseURL: 'https://nextjs-firebase-auth-test.firebaseio.com',
-  projectId: 'nextjs-firebase-auth-test',
-  storageBucket: 'nextjs-firebase-auth-test.appspot.com',
-  messagingSenderId: '90669433896',
-};
 
-Firebase.initializeApp(config);
+firebase.initializeApp(firebaseConfig);
 // Initialize Cloud Firestore through Firebase
 // $FlowFixMe
-const db = Firebase.firestore();
+const db = firebase.firestore();
 
 export function authUser(uid: string): authUserActionType {
   return {
@@ -63,7 +58,7 @@ export function listenForUserProfileUpdates(uid: string) {
 }
 
 export function signUpUser(firstName: string, lastName: string, email: string, password: string) {
-  return Firebase.auth().createUserWithEmailAndPassword(email, password)
+  return firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((user) => {
       createUserRecord(user.uid, firstName, lastName, email);
     });
@@ -74,11 +69,11 @@ export function signUpUser(firstName: string, lastName: string, email: string, p
 // }
 
 export function signInUser(credentials: { email: string, password: string }) {
-  return Firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password);
+  return firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password);
 }
 
 export function signOutUser() {
-  return (dispatch: Dispatch) => Firebase.auth().signOut()
+  return (dispatch: Dispatch) => firebase.auth().signOut()
     .then(() => {
       dispatch({
         type: 'SIGN_OUT_USER',
@@ -87,18 +82,18 @@ export function signOutUser() {
 }
 
 export function sendPasswordResetEmail(email: string) {
-  return Firebase.auth().sendPasswordResetEmail(email);
+  return firebase.auth().sendPasswordResetEmail(email);
 }
 
 export function updatePassword(newPassword: string) {
-  const user = Firebase.auth().currentUser;
+  const user = firebase.auth().currentUser;
   return user.updatePassword(newPassword);
 }
 
 
 export function verifyAuth() {
   return (dispatch: Dispatch) => {
-    Firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         dispatch(authUser(user.uid));
         db.collection('users').doc(user.uid)
