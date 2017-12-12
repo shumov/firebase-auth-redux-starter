@@ -25,7 +25,7 @@ const InnerForm = ({
   (
     <main className="black-80">
       <form onSubmit={handleSubmit} className="measure">
-        <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
+        <fieldset id="change_password_form" className="ba b--transparent ph0 mh0">
           <legend className="f4 fw6 ph0 mh0">Change Password</legend>
           <FormWideError error={errors.formwide} />
           <div className="mt3">
@@ -60,7 +60,7 @@ const InnerForm = ({
   );
 
 // Wrap our form with the using withFormik HoC
-const UpdateProfileForm = withFormik({
+const ChangePasswordForm = withFormik({
   // Transform outer props into form values
   mapPropsToValues: () => ({
     password: '', passwordConfirm: '',
@@ -97,4 +97,4 @@ const UpdateProfileForm = withFormik({
   enableReinitialize: true,
 })(InnerForm);
 
-export default UpdateProfileForm;
+export default ChangePasswordForm;
